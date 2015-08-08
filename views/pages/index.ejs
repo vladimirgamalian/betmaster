@@ -10,11 +10,16 @@
                 <p>Очень помогает</p>
             </div>
         </div>
-
         <div class="container">
-            <div ng-controller="AlertDemoCtrl">
-                <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-                <button class='btn btn-default' ng-click="addAlert()">Add Alert</button>
+            <div ng-controller="FetchListCtrl as ctrl">
+                <p>
+                    <button class="btn btn-default" ng-disabled="ctrl.loading" ng-click="ctrl.fetchData()">Получить информацию</button>
+                </p>
+                <table class="table table-bordered">
+                    <tr ng-repeat="s in ctrl.data track by $index">
+                        <td>{{s}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </body>

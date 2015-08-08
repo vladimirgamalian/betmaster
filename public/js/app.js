@@ -1,15 +1,16 @@
 angular.module('betmaster', ['ui.bootstrap'])
-    .controller('AlertDemoCtrl', function ($scope) {
-        $scope.alerts = [
-            { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-            { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
-        ];
+    .controller('FetchListCtrl', function ($http) {
+        var that = this;
+        that.loading = false;
 
-        $scope.addAlert = function() {
-            $scope.alerts.push({msg: 'Another alert!'});
-        };
+        that.fetchData = function () {
+            that.data = null;
+            that.loading = true;
 
-        $scope.closeAlert = function(index) {
-            $scope.alerts.splice(index, 1);
-        };
+            $http.get('/api/data').then(function(response) {
+                that.data = response.data;
+            }).finally(function () {
+                that.loading = false;
+            });
+        }
     });
