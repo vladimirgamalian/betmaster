@@ -15,7 +15,7 @@
                 <p>
                     <button class="btn btn-default" ng-disabled="ctrl.loading" ng-click="ctrl.fetchData()">Получить информацию</button>
                 </p>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped">
                     <tr ng-repeat="s in ctrl.data track by $index">
                         <td>{{s}}</td>
                     </tr>
