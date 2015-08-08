@@ -1,0 +1,24 @@
+{
+  "name": "betmaster",
+  "main": "index.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/vladimirgamalian/betmaster",
+  "authors": [
+    "vladimir.gamalian@gmail.com"
+  ],
+  "description": "betmaster",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.13.2"
+  }
+}
