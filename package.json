@@ -7,8 +7,11 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "body-parser": "^1.13.3",
     "ejs": "^2.3.1",
     "express": "~4.9.x",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
     "x-ray": "^2.0.2"
   },
   "engines": {

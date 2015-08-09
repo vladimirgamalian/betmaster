@@ -12,12 +12,25 @@
         </div>
         <div class="container">
             <div ng-controller="FetchListCtrl as ctrl">
+
+                <h2>Выберите дату и нажмите кнопку "Матчи"</h2>
+                <div style="display:inline-block; min-height:290px;">
+                    <datepicker ng-model="ctrl.dt"
+                                starting-day="1"
+                                show-weeks="true"
+                                class="well well-sm"
+                                custom-class="getDayClass(date, mode)"></datepicker>
+                </div>
+
                 <p>
-                    <button class="btn btn-default" ng-disabled="ctrl.loading" ng-click="ctrl.fetchData()">Получить информацию</button>
+                    <button class="btn btn-default" ng-disabled="ctrl.loading" ng-click="ctrl.fetchData()">Матчи</button>
                 </p>
+
+
                 <table class="table table-bordered table-striped">
                     <tr ng-repeat="s in ctrl.data track by $index">
-                        <td>{{s}}</td>
+                        <td>{{s.match}}</td>
+                        <td>{{s.dateStr}}</td>
                     </tr>
                 </table>
             </div>
