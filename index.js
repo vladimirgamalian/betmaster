@@ -32,7 +32,7 @@ app.post('/api/data', function(request, response) {
         tzOffset = 3,   // Moscow GMT+3
         requestedDate = moment.tz(request.body.date, moscowTz);
 
-    console.log('requestedDate', requestedDate.format());
+    //console.log('requestedDate', requestedDate.format());
 
     // Convert DD.MM.YYYY to YYYY-MM-DD
     function convertDate(s) {
@@ -98,7 +98,8 @@ app.post('/api/data', function(request, response) {
 
             // Now get current season.
             requestModule({uri: curSeasonUrl, jar: jar}, function (error, resp, html) {
-                var currSeasonMatches = [];
+                var currSeasonMatches = [],
+                    currentDateTime;
 
                 if (!error && resp.statusCode == 200) {
                     var $ = cheerio.load(html),
@@ -109,21 +110,24 @@ app.post('/api/data', function(request, response) {
                         console.log('WARNING', tzOffset, realTzOffset);
                     }
 
-
                     $('table.league-fixtures tr').each(function (i, elem) {
                         var round = $(this).find('th.first-cell').text(),
-                            match = $(this).find('td.nobr').text(),
+                            matchNode = $(this).find('td.nobr'),
+                            match = matchNode.text(),
+                            matchLink = $(matchNode).find('a').attr('href'),
                             date = $(this).find('td.first-cell').text();
                         if (round) {
                             currentRound = parseInt(round, 10);
                         } else {
                             if (date.length >= 10) {
-                                currSeasonMatches.push({
-                                    match: match,
-                                    date: moment.tz(convertDateTime(date), moscowTz),
-                                    round: currentRound
-                                });
+                                currentDateTime = moment.tz(convertDateTime(date), moscowTz);
                             }
+                            currSeasonMatches.push({
+                                match: match,
+                                matchLink: betExplorerUri + matchLink,
+                                date: currentDateTime,
+                                round: currentRound
+                            });
                         }
                     });
 

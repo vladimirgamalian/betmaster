@@ -28,7 +28,7 @@
 
                 <table class="table table-bordered table-striped">
                     <tr ng-repeat="s in ctrl.data track by $index">
-                        <td>{{s.match}}</td>
+                        <td><a href="{{s.matchLink}}">{{s.match}}</a></td>
                         <td>{{s.prevDates}}</td>
                     </tr>
                 </table>
